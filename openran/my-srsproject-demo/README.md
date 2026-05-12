@@ -127,7 +127,7 @@ mkdir build
 cd build/
 cmake ../ -DENABLE_EXPORT=ON -DENABLE_ZEROMQ=ON
 make -j`nproc`
-cp /root/srsRAN_Project/build/apps/gnb /usr/bin/gnb
+cp /root/srsRAN_Project/build/apps/gnb/gnb /usr/bin/gnb
 ```
 
 &nbsp;
