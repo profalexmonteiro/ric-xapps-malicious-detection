@@ -196,7 +196,7 @@ mkdir build
 cd build/
 cmake ../ -DENABLE_EXPORT=ON -DENABLE_ZEROMQ=ON
 make -j`nproc`
-cp /root/srsRAN_4G/build/srsue/src/srsue /usr/bin/srsue
+cp ./srsue/src/srsue /usr/bin/srsue
 
 ip netns add ue1  
 ip netns list
