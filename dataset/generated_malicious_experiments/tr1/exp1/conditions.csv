@@ -1,0 +1,13 @@
+UE,Profile
+UE1,C:\Users\alex_\ric-xapps-malicious-detection\traffic_profiles\malicious\flood.sh
+UE2,C:\Users\alex_\ric-xapps-malicious-detection\traffic_profiles\normal\voip.sh
+UE3,C:\Users\alex_\ric-xapps-malicious-detection\traffic_profiles\malicious\flood.sh
+
+# M-map Parameters
+seed,0.912740353190805
+p,0.366245692374865
+
+# Channel Parameters
+ue1_path_loss_db,42
+ue2_path_loss_db,28
+ue3_path_loss_db,50

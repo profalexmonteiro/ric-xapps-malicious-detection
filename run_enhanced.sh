@@ -1063,7 +1063,7 @@ run_single_experiment() {
         return 1
     fi
     
-    Wait for metrics process to complete
+    # Wait for metrics process to complete
     info "Waiting for metrics collection to complete"
     wait "$metrics_pid" 2>/dev/null || true
     success "Traffic generation completed its active phase."
