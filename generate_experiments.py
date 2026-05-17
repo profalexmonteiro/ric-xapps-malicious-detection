@@ -9,7 +9,7 @@ UE_COUNT = 3
 EXPERIMENTS_PER_TR = 1
 TOTAL_TRAINING_RUNS = 50
 TRAFFIC_PROFILE_DIR = Path("traffic_profiles")
-OUTPUT_DIR = Path("generated_experiments")
+OUTPUT_DIR = Path("dataset/generated_experiments")
 SCENARIO_SCRIPT = Path(os.environ.get("PWD", os.getcwd())) / "openran" / "my-srsproject-demo" / "multi-ue-setup" / "multi_ue_scenario_nogui.py"
 DURATION_SEC = 480  # 8 minutes
 
