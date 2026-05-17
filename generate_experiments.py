@@ -1,6 +1,5 @@
 import os
 import shutil
-import random
 from pathlib import Path
 from argparse import ArgumentParser
 from mmap_generator import MMapGenerator, generate_channel_parameters
@@ -62,7 +61,7 @@ def create_exp_folder(tr_id, exp_id, g, channel_params, profile_assignments):
         for k, v in channel_params.items():
             f.write(f"{k},{v}\n")
 
-    print(f"  ✅ Created: {exp_path.relative_to(OUTPUT_DIR)}")
+    print(f"  [OK] Created: {exp_path.relative_to(OUTPUT_DIR)}")
 
 
 
@@ -98,7 +97,7 @@ def main():
         for exp in range(1, EXPERIMENTS_PER_TR + 1):
             create_exp_folder(tr, exp, g, channel_params, profile_assignments)
 
-    print(f"\n🎯 All experiments generated in: {OUTPUT_DIR.resolve()}")
+    print(f"\nAll experiments generated in: {OUTPUT_DIR.resolve()}")
 
 
 if __name__ == "__main__":
