@@ -20,15 +20,16 @@ if ! [[ "$START_TR" =~ ^[0-9]+$ && "$START_EXP" =~ ^[0-9]+$ ]]; then
 fi
 
 # --- Configuration ---
-CSV_FILE="/home/g3043047j/dataset/ue_data.csv"
-GNB_CONF="/home/g3043047j/openran/my-srsproject-demo/multi-ue-setup/gnb_zmq.yaml"
-UE_CONF="/home/g3043047j/openran/my-srsproject-demo/multi-ue-setup/ue1_zmq.conf"
+BASE_DIR="${PWD}"
+CSV_FILE="${BASE_DIR}/dataset/ue_data.csv"
+GNB_CONF="${BASE_DIR}/openran/my-srsproject-demo/multi-ue-setup/gnb_zmq.yaml"
+UE_CONF="${BASE_DIR}/openran/my-srsproject-demo/multi-ue-setup/ue1_zmq.conf"
 METRICS_IP="127.0.0.1"
 RIC_IP="127.0.0.1"
 AMF_IP="10.53.1.2"
 TOTAL_TRAINING_SETS=100
 TOTAL_EXPERIMENTS=1
-BASE_EXP_DIR="/home/g3043047j/dataset/generated_malicious_experiments"
+BASE_EXP_DIR="${BASE_DIR}/dataset/generated_malicious_experiments"
 BASE_IP="10.45.1.2"
 CURRENT_RUN=$((START_TR * TOTAL_EXPERIMENTS + START_EXP - 1))
 CURRENT_TR=$START_TR
@@ -253,7 +254,7 @@ cleanup() {
     # Enhanced Docker cleanup with parallel execution and timeouts
     info "Stopping Docker services..."
     (
-        cd ~/openran/oran-sc-ric
+        cd "${BASE_DIR}/openran/oran-sc-ric"
         timeout 30s sudo docker compose down -v --remove-orphans > /dev/null 2>&1 || {
             warn "RIC docker compose down timed out, force stopping containers"
             sudo docker stop $(sudo docker ps -q --filter "name=ric") 2>/dev/null || true
@@ -261,7 +262,7 @@ cleanup() {
     ) &
     
     (
-        cd ~/openran/srsRAN_Project/docker
+        cd "${BASE_DIR}/openran/srsRAN_Project/docker"
         timeout 30s sudo docker compose down -v --remove-orphans > /dev/null 2>&1 || {
             warn "srsRAN docker compose down timed out, force stopping containers"
             sudo docker stop $(sudo docker ps -q --filter "name=open5gs") 2>/dev/null || true
@@ -497,7 +498,7 @@ start_gnb() {
     
     # Start metrics server with better error handling
     info "Starting metrics server on port $metrics_port"
-    python3 /home/g3043047j/metrics_server.py \
+    python3 "${BASE_DIR}/metrics_server.py" \
         -f "${log_dir}/${name}_metrics.jsonl" \
         -p "$metrics_port" > /dev/null 2>&1 &
     
@@ -866,7 +867,7 @@ run_single_experiment() {
     step "[1/6] Starting Near-RT RIC"
     save_experiment_state "$tr_num" "$exp_num" "ric_starting" "$retry_count"
     
-    cd ~/openran/oran-sc-ric
+    cd "${BASE_DIR}/openran/oran-sc-ric"
     if ! retry_with_backoff 3 10 "RIC startup" \
          sudo env METRICS_PATH="${exp_dir}/metrics" docker compose up -d; then
         error "Failed to start Near-RT RIC"
@@ -882,7 +883,7 @@ run_single_experiment() {
     step "[2/6] Starting Open5GS Core"
     save_experiment_state "$tr_num" "$exp_num" "5gc_starting" "$retry_count"
     
-    cd ~/openran/srsRAN_Project/docker
+    cd "${BASE_DIR}/openran/srsRAN_Project/docker"
     if ! retry_with_backoff 3 10 "5GC startup" \
          sudo docker compose up -d; then
         error "Failed to start Open5GS Core"
@@ -1033,7 +1034,7 @@ run_single_experiment() {
     step "[6/6] Running experiment"
     save_experiment_state "$tr_num" "$exp_num" "experiment_running" "$retry_count"
     
-    cd ~/openran/oran-sc-ric
+    cd "${BASE_DIR}/openran/oran-sc-ric"
     
     # Clean up previous metrics files
     rm -f "$metrics_log_file"
