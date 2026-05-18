@@ -101,6 +101,7 @@ else
  
     echo "▶ Copiando binário para /usr/bin/srsue..."
     sudo cp "$SRSRAN_4G_DIR/build/srsue/src/srsue" /usr/bin/srsue
+    sudo cp "$SRSRAN_4G_DIR/build/build/lib/src/phy/rf/libsrsran_rf*" /usr/lib
  
     # Valida se a compilação foi bem-sucedida
     if srsue --version > /dev/null 2>&1; then
