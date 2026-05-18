@@ -11,7 +11,7 @@ TOTAL_TRAINING_RUNS = 100
 TRAFFIC_PROFILE_DIR = Path("traffic_profiles")
 # Changed output directory to keep malicious data separate
 OUTPUT_DIR = Path("dataset/generated_malicious_experiments")
-SCENARIO_SCRIPT = Path(os.environ.get("PWD", os.getcwd())) / "openran" / "my-srsproject-demo" / "multi-ue-setup" / "multi_ue_scenario.py"
+SCENARIO_SCRIPT = Path(os.environ.get("PWD", os.getcwd())) / "openran" / "my-srsproject-demo" / "multi-ue-setup" / "multi_ue_scenario_nogui.py"
 DURATION_SEC = 480  # 8 minutes
 
 
