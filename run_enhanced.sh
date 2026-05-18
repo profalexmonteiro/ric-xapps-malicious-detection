@@ -558,7 +558,7 @@ start_gnb() {
         --high_latency_diagnostics_enabled true \
         --broadcast_enabled true \
         --radio_level warning \
-        --hex_max_size 1024 \            
+        --hex_max_size 1024 \
         pcap \
         --mac_enable true \
         --mac_filename ${log_dir}/${name}_mac.pcap \
