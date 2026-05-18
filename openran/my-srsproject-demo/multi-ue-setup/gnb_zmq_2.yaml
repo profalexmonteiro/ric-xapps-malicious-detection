@@ -74,8 +74,8 @@ e2:
 metrics:
   # periodicity:
   # app_usage_report: 1000
-#  addr: 127.0.0.1
- # port: 55555
+  addr: 127.0.0.1
+  port: 55555
   enable_json: true
   enable_log: true
   enable_verbose: true
@@ -84,7 +84,7 @@ metrics:
     enable_app_usage: true
     enable_e1ap: true
     enable_pdcp: true
-#    enable_cu_up_executor: true
+    enable_cu_up_executor: true
     enable_sched: true
     enable_rlc: true
     enable_mac: true
