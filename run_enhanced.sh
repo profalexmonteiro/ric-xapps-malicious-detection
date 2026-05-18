@@ -552,14 +552,13 @@ start_gnb() {
         --device_args tx_port=tcp://127.0.0.1:${tx_port},rx_port=tcp://127.0.0.1:${rx_port},base_srate=11.52e6 \
         log \
         --filename ${log_dir}/${name}.log \
+        --tracing_filename ${log_dir}/${name}_tracing.log \
         --e1ap_json_enabled true \
         --f1ap_json_enabled true \
         --high_latency_diagnostics_enabled true \
         --broadcast_enabled true \
         --radio_level warning \
-        --hex_max_size 1024 \
-        trace \
-        --filename ${log_dir}/${name}_tracing.log \
+        --hex_max_size 1024 \            
         pcap \
         --mac_enable true \
         --mac_filename ${log_dir}/${name}_mac.pcap \
