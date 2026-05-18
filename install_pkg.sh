@@ -80,7 +80,7 @@ if srsue --version > /dev/null 2>&1; then
 else
     echo "⚠️  'srsue' não encontrado ou não funcional. Iniciando compilação do srsRAN_4G..."
  
-    SRSRAN_4G_DIR="$PWD/openran/srsRAN_Project/srsRAN_4G"
+    SRSRAN_4G_DIR="$PWD/openran/srsRAN_4G"
  
     if [[ ! -d "$SRSRAN_4G_DIR" ]]; then
         echo "❌ Diretório não encontrado: $SRSRAN_4G_DIR"
