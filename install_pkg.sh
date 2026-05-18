@@ -70,3 +70,44 @@ else
         exit 1
     fi
 fi
+
+# Verifica se o comando srsue está disponível e funcional
+echo ""
+echo "Verificando disponibilidade do comando 'srsue'..."
+ 
+if srsue --version > /dev/null 2>&1; then
+    echo "✅ 'srsue' encontrado e funcional: $(srsue --version 2>&1 | head -n1)"
+else
+    echo "⚠️  'srsue' não encontrado ou não funcional. Iniciando compilação do srsRAN_4G..."
+ 
+    SRSRAN_4G_DIR="$PWD/openran/srsRAN_Project/srsRAN_4G"
+ 
+    if [[ ! -d "$SRSRAN_4G_DIR" ]]; then
+        echo "❌ Diretório não encontrado: $SRSRAN_4G_DIR"
+        echo "   Verifique se o repositório foi clonado corretamente."
+        exit 1
+    fi
+ 
+    cd "$SRSRAN_4G_DIR" || exit 1
+ 
+    mkdir -p build
+    cd build/ || exit 1
+ 
+    echo "▶ Executando cmake..."
+    cmake ../ -DENABLE_EXPORT=ON -DENABLE_ZEROMQ=ON
+ 
+    echo "▶ Compilando com $(nproc) threads..."
+    make -j"$(nproc)"
+ 
+    echo "▶ Copiando binário para /usr/bin/srsue..."
+    sudo cp "$SRSRAN_4G_DIR/build/srsue/src/srsue" /usr/bin/srsue
+ 
+    # Valida se a compilação foi bem-sucedida
+    if srsue --version > /dev/null 2>&1; then
+        echo "✅ srsRAN 4G compilado e instalado com sucesso: $(srsue --version 2>&1 | head -n1)"
+    else
+        echo "❌ Compilação concluída, mas 'srsue' ainda não está acessível."
+        echo "   Verifique se o binário está no PATH ou em $SRSRAN_4G_DIR/build/srsue/src/srsue"
+        exit 1
+    fi
+fi
