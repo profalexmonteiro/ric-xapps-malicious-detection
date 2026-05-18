@@ -581,9 +581,9 @@ start_gnb() {
         --f1u_filename ${log_dir}/${name}_f1u.pcap \
         --n3_enable true \
         --n3_filename ${log_dir}/${name}_n3.pcap \
-        # metrics \
-        #--addr ${METRICS_IP} \
-        # --port ${metrics_port} \
+        metrics \
+        --addr ${METRICS_IP} \
+        --port ${metrics_port} \
         < /dev/null > ${log_dir}/${name}_stdout.log 2>&1"
     
     success "gNB $name started successfully"
