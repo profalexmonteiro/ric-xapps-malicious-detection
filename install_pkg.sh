@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+MAIN_DIR="$PWD"
 # Add Docker's official GPG key:
 sudo apt update
 sudo apt install ca-certificates curl -y
@@ -39,7 +39,7 @@ if sudo gnb --version > /dev/null 2>&1; then
 else
     echo "⚠️  'gnb' não encontrado ou não funcional. Iniciando compilação do srsRAN_Project..."
  
-    SRSRAN_DIR="$PWD/openran/srsRAN_Project"
+    SRSRAN_DIR="$MAIN_DIR/openran/srsRAN_Project"
  
     if [[ ! -d "$SRSRAN_DIR" ]]; then
         echo "❌ Diretório não encontrado: $SRSRAN_DIR"
@@ -80,7 +80,7 @@ if srsue --version > /dev/null 2>&1; then
 else
     echo "⚠️  'srsue' não encontrado ou não funcional. Iniciando compilação do srsRAN_4G..."
  
-    SRSRAN_4G_DIR="$PWD/openran/srsRAN_4G"
+    SRSRAN_4G_DIR="$MAIN_DIR/openran/srsRAN_4G"
  
     if [[ ! -d "$SRSRAN_4G_DIR" ]]; then
         echo "❌ Diretório não encontrado: $SRSRAN_4G_DIR"
